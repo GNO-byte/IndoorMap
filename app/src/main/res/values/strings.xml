@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Shopping center</string>
+    <string name="roomType_shops">shops</string>
+    <string name="roomType_cafes">cafes</string>
+    <string name="roomType_other">other</string>
+
+    <string name="menu_activity_main_search">Search</string>
+    <string name="menu_activity_main_map">Map</string>
+
+    <string name="button_label_FourthFloor">4</string>
+    <string name="button_label_ThirdFloor">3</string>
+    <string name="button_label_SecondFloor">2</string>
+    <string name="button_label_FirstFloor">1</string>
+    <string name="shop_1">shop 1</string>
+    <string name="telephone">Telephone:</string>
+    <string name="search_hint">search shop</string>
+</resources>

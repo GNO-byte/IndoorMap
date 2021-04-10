@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+
+        android:id="@+id/room_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:strokeColor="@color/design_default_color_on_secondary"
+        app:strokeWidth="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/room_card_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/shop_1"
+                app:layout_constraintBottom_toBottomOf="@+id/room_card_group"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_shop_black_24dp"
+                tools:ignore="VectorDrawableCompat" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/room_card_name"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/room_card_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="shop 1" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/room_card_group"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/room_card_icon"
+                app:layout_constraintStart_toStartOf="@+id/room_card_name"
+                app:layout_constraintTop_toBottomOf="@id/room_card_name"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="shop 1" />
+
+            <View
+                android:id="@+id/room_card_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorBlack"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/room_card_group"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/room_card_phone_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="@string/telephone"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/room_card_icon"
+                app:layout_constraintTop_toBottomOf="@+id/room_card_divider"
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="@string/telephone" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/room_card_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/room_card_name"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/room_card_phone_title"
+                app:layout_constraintTop_toBottomOf="@+id/room_card_divider"
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="shop 1" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
