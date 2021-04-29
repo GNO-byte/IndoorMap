@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.gno.indoormap.R
 import com.gno.indoormap.map.MapViewModel
-import com.gno.indoormap.model.Room
-import com.gno.indoormap.search.SearchFragment
 import com.gno.indoormap.search.SearchRecyclerAdapter
 import com.gno.indoormap.search.SearchViewModel
 import dagger.Module
@@ -30,18 +28,17 @@ class FragmentModule(private val fragment: Fragment) {
         ViewModelProvider(providesFragment()).get(SearchViewModel::class.java)
 
     @Provides
-    fun searchRecyclerAdapter(): SearchRecyclerAdapter = SearchRecyclerAdapter {
-        onCellClickListener(it)
-    }
+    fun searchRecyclerAdapter(): SearchRecyclerAdapter =
+        SearchRecyclerAdapter { name, numberFloor ->
+            onCellClickListener(name, numberFloor)
+        }
 
-    private fun onCellClickListener(position: Int) {
-
-        val room: Room = (fragment as SearchFragment).searchRecyclerAdapter.getRoom(position)
+    private fun onCellClickListener(name: String, numberFloor: Int) {
 
         fragment.findNavController().navigate(
             R.id.mapFragment, bundleOf(
-                "ROOM_NAME" to room.name,
-                "FLOOR_NUMBER" to room.numberFloor
+                "ROOM_NAME" to name,
+                "FLOOR_NUMBER" to numberFloor
             )
         )
     }

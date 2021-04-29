@@ -16,7 +16,7 @@ import com.gno.indoormap.model.RoomType
 
 
 class SearchRecyclerAdapter(
-    private val cellClickListener: (Int) -> Unit
+    private val cellClickListener: (String, Int) -> Unit
 ) : ListAdapter<Room, SearchRecyclerAdapter.DataHolder>(DataItemDiffUtilCallback()), Filterable {
 
     var allSearchRooms = ArrayList<Room>()
@@ -32,10 +32,6 @@ class SearchRecyclerAdapter(
             0 -> 0
             else -> count
         }
-    }
-
-    fun getRoom(id: Int): Room {
-        return getItem(id)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataHolder {
@@ -72,11 +68,13 @@ class SearchRecyclerAdapter(
 
     override fun onBindViewHolder(holder: DataHolder, position: Int) {
 
+        val item = getItem(position)
+
         holder.searchCard.setOnClickListener {
-            cellClickListener.invoke(position)
+            cellClickListener.invoke(item.name, item.numberFloor)
         }
 
-        val item = getItem(position)
+
         holder.searchCardName.text = item.name
         holder.searchCardGroup.setText(item.type.idString)
 

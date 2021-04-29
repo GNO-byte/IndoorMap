@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         //toolbar
         setSupportActionBar(findViewById(R.id.toolbar))
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -47,8 +46,6 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         if (item.itemId == R.id.action_search) navController.navigate(R.id.searchFragment)
-//       NavigationUI.onNavDestinationSelected(item, navController);
-//        return super.onOptionsItemSelected(item);
         return true
 
     }

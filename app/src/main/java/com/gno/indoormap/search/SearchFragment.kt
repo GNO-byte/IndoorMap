@@ -72,7 +72,10 @@ class SearchFragment : Fragment() {
             }
         })
 
-        viewModel.getAllRooms(activity?.applicationContext as MainApplication)
+        activity?.let { fragmentActivity ->
+            viewModel.getAllRooms(fragmentActivity.applicationContext as MainApplication)
+        }
+
         viewModel.roomsLiveData.observe(viewLifecycleOwner, {
             searchFragmentBinding.storesList.adapter = searchRecyclerAdapter
             searchRecyclerAdapter.submitFullList(it as ArrayList<Room>)

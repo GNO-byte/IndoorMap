@@ -56,66 +56,69 @@ class MapFragment : Fragment() {
 
     private fun initMapView() {
 
-        val currentRoomName = arguments?.getString("ROOM_NAME")
-        val currentFloorNumber = arguments?.getInt("FLOOR_NUMBER")
+        val currentRoomName = arguments?.getString("ROOM_NAME") ?: ""
+        val currentFloorNumber = arguments?.getInt("FLOOR_NUMBER") ?: 0
 
-        viewModel.getFloor(
-            1,
-            activity?.applicationContext as MainApplication,
-            currentRoomName ?: "",
-            currentFloorNumber ?: 0
-        )
-        viewModel.transferLiveDate.observe(viewLifecycleOwner, {
-            mapFragmentBinding.includeMapPicture.mapPicture.setMapViewListener(object :
-                MapViewListener {
-                override fun onMapLoadSuccess() {
-                    for (room in it.floor.rooms) {
-                        lateinit var roomLayer: RoomLayer
-                        if (it.currentRoom != null && room == it.currentRoom) {
-                            roomLayer = RoomLayer(
-                                mapFragmentBinding.includeMapPicture.mapPicture,
-                                it.currentRoom.points,
-                                true
-                            )
-                            mapFragmentBinding.includeMapPicture.mapPicture.activeRoomLayer =
-                                roomLayer
-                            GlobalScope.launch(Dispatchers.Main) {
-                                showRoomCard(it.currentRoom)
+        activity?.let { fragmentActivity ->
+            viewModel.getFloor(
+                1,
+                fragmentActivity.applicationContext as MainApplication,
+                currentRoomName,
+                currentFloorNumber
+            )
+
+            viewModel.transferLiveDate.observe(viewLifecycleOwner, {
+                mapFragmentBinding.includeMapPicture.mapPicture.setMapViewListener(object :
+                    MapViewListener {
+                    override fun onMapLoadSuccess() {
+                        for (room in it.floor.rooms) {
+                            lateinit var roomLayer: RoomLayer
+                            if (it.currentRoom != null && room == it.currentRoom) {
+                                roomLayer = RoomLayer(
+                                    mapFragmentBinding.includeMapPicture.mapPicture,
+                                    it.currentRoom.points,
+                                    true
+                                )
+                                mapFragmentBinding.includeMapPicture.mapPicture.activeRoomLayer =
+                                    roomLayer
+                                GlobalScope.launch(Dispatchers.Main) {
+                                    showRoomCard(it.currentRoom)
+                                }
+                            } else {
+                                roomLayer = RoomLayer(
+                                    mapFragmentBinding.includeMapPicture.mapPicture,
+                                    room.points,
+                                    false
+                                )
                             }
-                        } else {
-                            roomLayer = RoomLayer(
-                                mapFragmentBinding.includeMapPicture.mapPicture,
-                                room.points,
-                                false
-                            )
-                        }
-                        roomLayer.listener = object : RoomLayer.RoomIsClickListener {
-                            override fun roomIsClick(visiable: Boolean) {
-                                if (visiable) {
-                                    showRoomCard(room)
-                                } else {
-                                    mapFragmentBinding.includeRoomCard.roomCard.visibility =
-                                        View.GONE
+                            roomLayer.listener = object : RoomLayer.RoomIsClickListener {
+                                override fun roomIsClick(visiable: Boolean) {
+                                    if (visiable) {
+                                        showRoomCard(room)
+                                    } else {
+                                        mapFragmentBinding.includeRoomCard.roomCard.visibility =
+                                            View.GONE
+                                    }
                                 }
                             }
+
+                            mapFragmentBinding.includeMapPicture.mapPicture.addLayer(roomLayer)
                         }
-
-                        mapFragmentBinding.includeMapPicture.mapPicture.addLayer(roomLayer)
+                        mapFragmentBinding.includeMapPicture.mapPicture.refresh()
                     }
-                    mapFragmentBinding.includeMapPicture.mapPicture.refresh()
-                }
 
-                override fun onMapLoadFail() {
-                    //Log.i(TAG, "onMapLoadFail");
-                }
-            })
+                    override fun onMapLoadFail() {
+                        //Log.i(TAG, "onMapLoadFail");
+                    }
+                })
 
-            mapFragmentBinding.includeMapPicture.mapPicture.loadMap(
-                BitmapFactory.decodeStream(
-                    activity?.assets?.open(it.floor.mapName)
+                mapFragmentBinding.includeMapPicture.mapPicture.loadMap(
+                    BitmapFactory.decodeStream(
+                        fragmentActivity.assets.open(it.floor.mapName)
+                    )
                 )
-            )
-        })
+            })
+        }
     }
 
     fun showRoomCard(room: Room) {

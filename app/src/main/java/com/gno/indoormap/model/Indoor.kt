@@ -88,17 +88,6 @@ class Indoor private constructor(assetManager: AssetManager) {
         return rooms
     }
 
-//    fun getAllSearchRoom(): List<Room>? {
-//        val searchRooms: ArrayList<Room> = ArrayList<Room>()
-//        for (floor in floors!!) {
-//            for (room in floor.rooms) {
-//                val searchRoom = SearchRoom(room, floor.number)
-//                searchRooms.add(searchRoom)
-//            }
-//        }
-//        return searchRooms
-//    }
-
     fun getRoom(currentRoomName: String, currentFloorNumber: Int): Room? {
 
         if (currentRoomName == "" || currentFloorNumber == 0) {
